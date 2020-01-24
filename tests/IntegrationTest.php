@@ -64,7 +64,7 @@ class IntegrationTest extends TestCase
     {
         $response = $this->http->request('GET', '/echo/hello');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertStringContainsString('hello', (string)$response->getBody());
+        $this->assertStringContainsString('hello', (string) $response->getBody());
     }
 
     public function testGet(): void
@@ -85,7 +85,7 @@ class IntegrationTest extends TestCase
             'http_errors' => false,
             'headers' => [
                 'Authorization' => 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
-            ]
+            ],
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
@@ -99,7 +99,7 @@ class IntegrationTest extends TestCase
             'http_errors' => false,
             'headers' => [
                 'Authorization' => 'Basic ljknw=',
-            ]
+            ],
         ]);
 
         $this->assertEquals(401, $response->getStatusCode());
@@ -121,7 +121,8 @@ class IntegrationTest extends TestCase
     {
         $response = $this->http->request('PUT', '/entries/1', [
             'auth' => [
-                'username', 'password',
+                'username',
+                'password',
             ],
         ]);
 

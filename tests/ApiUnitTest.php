@@ -35,7 +35,7 @@ final class ApiUnitTest extends TestCase
         $api = $this->api;
         $message = 'Hello REST';
         $this->assertNull(
-            $api->get('/', function () use ($message) {
+            $api->get('/', function () {
                 http_response_code(200);
             })
         );
