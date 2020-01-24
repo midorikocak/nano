@@ -48,18 +48,18 @@ Defining rest routes and using wildcards are easy.
 $message = 'Welcome to Nano';
 
 $api->get('/', function () use ($message) {
-    echo json_encode(['message' => $message], JSON_THROW_ON_ERROR, 512);
+    echo json_encode(['message' => $message]);
     http_response_code(200);
 });
 
 $api->post('/', function () use ($message) {
     $input = (array)json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
-    echo json_encode($input, JSON_THROW_ON_ERROR, 512);
+    echo json_encode($input);
     http_response_code(201);
 });
 
 $api->get('/echo/{$message}', function ($message) {
-    echo json_encode(['message' => $message], JSON_THROW_ON_ERROR, 512);
+    echo json_encode(['message' => $message]);
     http_response_code(200);
 });
 
@@ -78,17 +78,17 @@ $authFunction = function ($username, $password) {
 $api->auth(function () use (&$api) {
 
     $api->get('/entries/{id}', function ($id) {
-        echo json_encode(['id' => $id], JSON_THROW_ON_ERROR, 512);
+        echo json_encode(['id' => $id]);
         http_response_code(201);
     });
 
     $api->post('/entries/{id}', function ($id) {
-        echo json_encode(['id' => $id], JSON_THROW_ON_ERROR, 512);
+        echo json_encode(['id' => $id]);
         http_response_code(201);
     });
 
     $api->put('/entries/{id}', function ($id) {
-        echo json_encode(['id' => $id], JSON_THROW_ON_ERROR, 512);
+        echo json_encode(['id' => $id]);
         http_response_code(204);
     });
 
