@@ -6,6 +6,7 @@ namespace midorikocak\nano;
 
 use Exception;
 
+use function array_key_exists;
 use function array_map;
 use function array_shift;
 use function array_values;
@@ -13,7 +14,6 @@ use function base64_decode;
 use function count;
 use function explode;
 use function header;
-use function headers_sent;
 use function http_response_code;
 use function is_callable;
 use function is_string;
@@ -123,7 +123,7 @@ class Api
             $compared = $this->compareAgainstWildcards($uri);
             if (!empty($compared)) {
                 try {
-                    if(!array_key_exists($compared['pattern'], $this->endpoints[$method])){
+                    if (!array_key_exists($compared['pattern'], $this->endpoints[$method])) {
                         throw new Exception('Not found');
                     }
                     $fn = $this->endpoints[$method][$compared['pattern']];
@@ -145,10 +145,9 @@ class Api
             }
         }
 
-        if ($this->responseCode && http_response_code() == '200') {
+        if ($this->responseCode && http_response_code() === '200') {
             http_response_code($this->responseCode);
         }
-
     }
 
     private function compareAgainstWildcards($uri): array
@@ -182,9 +181,9 @@ class Api
         return [];
     }
 
-    private function hasBrackets($uri)
+    private function hasBrackets($uri): bool
     {
-        return preg_match('/{(.*?)}/', $uri);
+        return preg_match('/{(.*?)}/', $uri) !== false;
     }
 
     public function getResponseCode(int $code): void
@@ -226,6 +225,4 @@ class Api
             $this->endpoints[$name][$endpoint] = $arguments[1];
         }
     }
-
-
 }
