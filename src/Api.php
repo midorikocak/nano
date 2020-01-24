@@ -6,7 +6,6 @@ namespace midorikocak\nano;
 
 use Exception;
 
-use function array_key_exists;
 use function array_map;
 use function array_shift;
 use function array_values;
@@ -14,6 +13,7 @@ use function base64_decode;
 use function count;
 use function explode;
 use function header;
+use function headers_sent;
 use function http_response_code;
 use function is_callable;
 use function is_string;
@@ -38,7 +38,7 @@ class Api
     private string $origin = '*';
     private int $responseCode = 404;
 
-    public function __construct(?string $origin = '*')
+    public function __construct($origin = '*')
     {
         $this->origin = $origin;
         header("Access-Control-Allow-Origin: $this->origin");
@@ -123,7 +123,7 @@ class Api
             $compared = $this->compareAgainstWildcards($uri);
             if (!empty($compared)) {
                 try {
-                    if (!array_key_exists($compared['pattern'], $this->endpoints[$method])) {
+                    if(!array_key_exists($compared['pattern'], $this->endpoints[$method])){
                         throw new Exception('Not found');
                     }
                     $fn = $this->endpoints[$method][$compared['pattern']];
@@ -145,9 +145,10 @@ class Api
             }
         }
 
-        if ($this->responseCode && http_response_code() === '200') {
+        if ($this->responseCode && http_response_code() == '200') {
             http_response_code($this->responseCode);
         }
+
     }
 
     private function compareAgainstWildcards($uri): array
@@ -225,4 +226,6 @@ class Api
             $this->endpoints[$name][$endpoint] = $arguments[1];
         }
     }
+
+
 }
