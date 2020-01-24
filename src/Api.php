@@ -141,7 +141,7 @@ class Api
             }
         }
 
-        if ($this->responseCode && http_response_code() == '200') {
+        if ($this->responseCode && ((string) http_response_code() === '200')) {
             http_response_code($this->responseCode);
         }
     }
