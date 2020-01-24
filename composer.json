@@ -1,0 +1,55 @@
+{
+    "name": "midorikocak/nano",
+    "type": "library",
+    "description": "Nano is a very very tiny php app that allows you to create very fast rest interfaces.",
+    "keywords": [
+        "midorikocak",
+        "nano",
+        "api",
+        "rest"
+    ],
+    "homepage": "https://github.com/midorikocak/nano",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Midori Kocak",
+            "email": "mtkocak@gmail.com",
+            "homepage": "https://mtkocak.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : "~7.4",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^6.5",
+        "opsway/psr12-strict-coding-standard": "^0.3.0",
+        "phpunit/phpunit": ">=8.0",
+        "squizlabs/php_codesniffer": "^3.5",
+        "symfony/process": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "midorikocak\\nano\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "midorikocak\\nano\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs -vs src tests",
+        "fix-style": "phpcbf src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
