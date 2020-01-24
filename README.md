@@ -1,3 +1,5 @@
+<img src="nano.svg" alt="nano API" style="width:200px;"/>
+
 # Nano
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
