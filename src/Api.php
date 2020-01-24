@@ -41,10 +41,6 @@ class Api
     public function __construct($origin = '*')
     {
         $this->origin = $origin;
-        header("Access-Control-Allow-Origin: $this->origin");
-        header('Content-Type: application/json; charset=UTF-8');
-        header('Access-Control-Allow-Methods: OPTIONS, POST, GET, PUT, DELETE');
-        header('Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Content-Type, Accept');
     }
 
     public function setPrefix(string $prefix): void
@@ -145,7 +141,7 @@ class Api
             }
         }
 
-        if ($this->responseCode && http_response_code() === '200') {
+        if ($this->responseCode && http_response_code() == '200') {
             http_response_code($this->responseCode);
         }
     }
