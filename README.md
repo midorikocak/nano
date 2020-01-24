@@ -105,7 +105,7 @@ Hence the basic auth is not encrypted, using https is strictly advised.
 
 You can test your live API using `Guzzle/Client`
 
-```
+``` php
 <?php
 
 declare(strict_types=1);
