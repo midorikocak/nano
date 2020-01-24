@@ -1,4 +1,4 @@
-![nano API](nano.svg)
+![nano API](nano.png)
 # Nano
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
