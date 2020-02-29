@@ -117,7 +117,16 @@ class Api
                 $this->endpoints[$method] = [];
             }
             $compared = $this->compareAgainstWildcards($uri);
-            if (!empty($compared)) {
+            if (isset($this->endpoints[$method][$uri])) {
+                try {
+                    $fn = $this->endpoints[$method][$uri];
+                    $this->responseCode = 200;
+                    $fn();
+                } catch (Exception $e) {
+                    echo json_encode($e->getMessage(), JSON_THROW_ON_ERROR, 512);
+                    $this->responseCode = 404;
+                }
+            } elseif (!empty($compared)) {
                 try {
                     if (!array_key_exists($compared['pattern'], $this->endpoints[$method])) {
                         throw new Exception('Not found');
@@ -125,15 +134,6 @@ class Api
                     $fn = $this->endpoints[$method][$compared['pattern']];
                     $this->responseCode = 200;
                     $fn(...$compared['values']);
-                } catch (Exception $e) {
-                    echo json_encode($e->getMessage(), JSON_THROW_ON_ERROR, 512);
-                    $this->responseCode = 404;
-                }
-            } elseif (isset($this->endpoints[$method][$uri])) {
-                try {
-                    $fn = $this->endpoints[$method][$uri];
-                    $this->responseCode = 200;
-                    $fn();
                 } catch (Exception $e) {
                     echo json_encode($e->getMessage(), JSON_THROW_ON_ERROR, 512);
                     $this->responseCode = 404;
