@@ -6,6 +6,8 @@ namespace midorikocak\nano;
 
 use Exception;
 
+use midorikocak\nano\Exceptions\NotFoundException;
+use midorikocak\nano\Exceptions\UnauthorizedException;
 use function array_key_exists;
 use function array_map;
 use function array_shift;
@@ -129,7 +131,7 @@ class Api
             } elseif (!empty($compared)) {
                 try {
                     if (!array_key_exists($compared['pattern'], $this->endpoints[$method])) {
-                        throw new Exception('Not found');
+                        throw new NotFoundException();
                     }
                     $fn = $this->endpoints[$method][$compared['pattern']];
                     $this->responseCode = 200;
@@ -199,11 +201,10 @@ class Api
                 $fn();
             } else {
                 $this->responseCode = 401;
+                throw new UnauthorizedException();
             }
         } elseif (isset($_SESSION['user'])) {
             $fn();
-        } else {
-            $this->responseCode = 401;
         }
     }
 

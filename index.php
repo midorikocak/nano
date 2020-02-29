@@ -28,7 +28,6 @@ $api->get('/echo/{$message}', function ($message) {
 });
 
 
-
 $authFunction = function ($username, $password) {
     return ($username == 'username' && $password == 'password');
 };
