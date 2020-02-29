@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace midorikocak\nano;
 
-use Exception;
 use midorikocak\nano\Exceptions\NotFoundException;
-use midorikocak\nano\Exceptions\UnauthorizedException;
 
 use function array_key_exists;
 use function array_map;
@@ -19,7 +17,6 @@ use function header;
 use function http_response_code;
 use function is_callable;
 use function is_string;
-use function json_encode;
 use function parse_url;
 use function preg_match;
 use function preg_match_all;
@@ -29,7 +26,6 @@ use function strtolower;
 use function substr;
 use function trim;
 
-use const JSON_THROW_ON_ERROR;
 use const PHP_URL_PATH;
 
 class Api
@@ -120,26 +116,16 @@ class Api
             }
             $compared = $this->compareAgainstWildcards($uri);
             if (isset($this->endpoints[$method][$uri])) {
-                try {
-                    $fn = $this->endpoints[$method][$uri];
-                    $this->responseCode = 200;
-                    $fn();
-                } catch (Exception $e) {
-                    echo json_encode($e->getMessage(), JSON_THROW_ON_ERROR, 512);
-                    $this->responseCode = 404;
-                }
+                $fn = $this->endpoints[$method][$uri];
+                $this->responseCode = 200;
+                $fn();
             } elseif (!empty($compared)) {
-                try {
-                    if (!array_key_exists($compared['pattern'], $this->endpoints[$method])) {
-                        throw new NotFoundException();
-                    }
-                    $fn = $this->endpoints[$method][$compared['pattern']];
-                    $this->responseCode = 200;
-                    $fn(...$compared['values']);
-                } catch (Exception $e) {
-                    echo json_encode($e->getMessage(), JSON_THROW_ON_ERROR, 512);
-                    $this->responseCode = 404;
+                if (!array_key_exists($compared['pattern'], $this->endpoints[$method])) {
+                    throw new NotFoundException();
                 }
+                $fn = $this->endpoints[$method][$compared['pattern']];
+                $this->responseCode = 200;
+                $fn(...$compared['values']);
             }
         }
 
@@ -201,9 +187,9 @@ class Api
                 $fn();
             } else {
                 $this->responseCode = 401;
-                throw new UnauthorizedException();
             }
-        } elseif (isset($_SESSION['user'])) {
+        }
+        if (isset($_SESSION['user'])) {
             $fn();
         }
     }
