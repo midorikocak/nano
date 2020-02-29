@@ -141,7 +141,7 @@ class Api
             }
         }
 
-        if ($this->responseCode && ((string) http_response_code() === '200')) {
+        if ($this->responseCode && ((string)http_response_code() === '200')) {
             http_response_code($this->responseCode);
         }
     }
@@ -200,6 +200,10 @@ class Api
             } else {
                 $this->responseCode = 401;
             }
+        } elseif (isset($_SESSION['user'])) {
+            $fn();
+        } else {
+            $this->responseCode = 401;
         }
     }
 
