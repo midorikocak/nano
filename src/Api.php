@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace midorikocak\nano;
 
 use Exception;
-
 use midorikocak\nano\Exceptions\NotFoundException;
 use midorikocak\nano\Exceptions\UnauthorizedException;
+
 use function array_key_exists;
 use function array_map;
 use function array_shift;
