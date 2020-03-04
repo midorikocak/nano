@@ -148,9 +148,9 @@ class Api
     private function compareUri($uri, $pattern): array
     {
         // does url have brackets?
-        $hasBrackets = preg_match_all('/{(.+)}/', $pattern, $vars);
+        $hasBrackets = preg_match_all('~{(.+)}~', $pattern, $vars);
         if ($hasBrackets) {
-            $newPattern = preg_replace('/{.+?}/m', '([^/{}]+)', $pattern);
+            $newPattern = preg_replace('~/*{.+?}~m', '/*([^/{}]*)', $pattern);
             $passesNewPattern = preg_match('~^' . $newPattern . '$~', $uri, $values);
             array_shift($values);
             if ($passesNewPattern) {
