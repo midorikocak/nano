@@ -38,3 +38,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 - Nothing
+
+## [1.2.4] - 2020-03-04
+
+### Added
+- Nothing
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Fix optional wildcards
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
