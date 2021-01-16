@@ -31,9 +31,9 @@ $ composer require midorikocak/nano
 Simply instantiate and include in your app.
 
 ``` php
-use midorikocak\nano\Api;
-
 require __DIR__ . '/vendor/autoload.php';
+
+use midorikocak\nano\Api;
 
 $api = new Api();
 
