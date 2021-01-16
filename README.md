@@ -8,6 +8,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
+**CONTRIBUTORS WELCOME**
 
 Nano is a very very tiny php library that allows you to create very fast rest APIs. 
 
