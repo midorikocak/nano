@@ -12,7 +12,7 @@
 
 Nano is a very very tiny php library that allows you to create very fast rest APIs. 
 
-Think it's like Slim but if Slim is slim, Nano is anorexic.
+Think it's like Slim but Nano is only ~6.4 Kilobytes.
 
 ## Requirements
 
