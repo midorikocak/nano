@@ -24,7 +24,7 @@
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^6.5",
-        "opsway/psr12-strict-coding-standard": "^0.3.0",
+        "opsway/psr12-strict-coding-standard": "^0.5.0",
         "phpunit/phpunit": ">=8.0",
         "squizlabs/php_codesniffer": "^3.5",
         "symfony/process": "^5.0"
