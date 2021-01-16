@@ -80,13 +80,15 @@ class IntegrationTest extends TestCase
     public function testPost(): void
     {
         $data = ['message' => 'Hello Server'];
-        $response = $this->http->request('POST', '/entries/1', [
+        $response = $this->http->request(
+            'POST', '/entries/1', [
             'json' => $data,
             'http_errors' => false,
             'headers' => [
                 'Authorization' => 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
             ],
-        ]);
+            ]
+        );
 
         $this->assertEquals(201, $response->getStatusCode());
     }
@@ -94,37 +96,43 @@ class IntegrationTest extends TestCase
     public function testUnauthorized(): void
     {
         $data = ['message' => 'Hello Server'];
-        $response = $this->http->request('POST', '/entries/1', [
+        $response = $this->http->request(
+            'POST', '/entries/1', [
             'json' => $data,
             'http_errors' => false,
             'headers' => [
                 'Authorization' => 'Basic ljknw=',
             ],
-        ]);
+            ]
+        );
 
         $this->assertEquals(401, $response->getStatusCode());
     }
 
     public function testDelete(): void
     {
-        $response = $this->http->request('DELETE', '/entries/1', [
+        $response = $this->http->request(
+            'DELETE', '/entries/1', [
             'http_errors' => false,
             'headers' => [
                 'Authorization' => 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
             ],
-        ]);
+            ]
+        );
 
         $this->assertEquals(204, $response->getStatusCode());
     }
 
     public function testPut(): void
     {
-        $response = $this->http->request('PUT', '/entries/1', [
+        $response = $this->http->request(
+            'PUT', '/entries/1', [
             'auth' => [
                 'username',
                 'password',
             ],
-        ]);
+            ]
+        );
 
         $this->assertEquals(204, $response->getStatusCode());
     }

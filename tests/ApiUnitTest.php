@@ -35,9 +35,11 @@ final class ApiUnitTest extends TestCase
         $api = $this->api;
         $message = 'Hello REST';
         $this->assertNull(
-            $api->get('/', function () {
-                http_response_code(200);
-            })
+            $api->get(
+                '/', function () {
+                    http_response_code(200);
+                }
+            )
         );
     }
 
@@ -48,10 +50,12 @@ final class ApiUnitTest extends TestCase
     {
         $api = $this->api;
         $this->assertNull(
-            $api->get('/echo/{$message}', function ($message) {
-                echo json_encode(['message' => $message], JSON_THROW_ON_ERROR, 512);
-                http_response_code(200);
-            })
+            $api->get(
+                '/echo/{$message}', function ($message) {
+                    echo json_encode(['message' => $message], JSON_THROW_ON_ERROR, 512);
+                    http_response_code(200);
+                }
+            )
         );
     }
 
@@ -67,10 +71,12 @@ final class ApiUnitTest extends TestCase
         $this->assertNull(
             $api->auth(
                 function () use ($api) {
-                    $api->get('/echo/{$message}', function ($message) {
-                        echo json_encode(['message' => $message], JSON_THROW_ON_ERROR, 512);
-                        http_response_code(200);
-                    });
+                    $api->get(
+                        '/echo/{$message}', function ($message) {
+                            echo json_encode(['message' => $message], JSON_THROW_ON_ERROR, 512);
+                            http_response_code(200);
+                        }
+                    );
                 },
                 $auth
             )
@@ -89,10 +95,12 @@ final class ApiUnitTest extends TestCase
         $this->assertNull(
             $api->auth(
                 function () use ($api) {
-                    $api->get('/echo/{$message}', function ($message) {
-                        echo json_encode(['message' => $message], JSON_THROW_ON_ERROR, 512);
-                        http_response_code(200);
-                    });
+                    $api->get(
+                        '/echo/{$message}', function ($message) {
+                            echo json_encode(['message' => $message], JSON_THROW_ON_ERROR, 512);
+                            http_response_code(200);
+                        }
+                    );
                 },
                 $auth
             )
