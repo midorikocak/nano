@@ -68,7 +68,7 @@ $api->get('/echo/{$message}', function ($message) {
 
 ### Basic Auth
 
-It's possible hide your routed behind an authentication layer. Currently it expects basic auth, more methods to come soon.
+It's possible hide your routes behind an authentication layer. Currently it expects basic auth, more methods to come soon.
 
 ``` php
 
